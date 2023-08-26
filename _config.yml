@@ -161,6 +161,7 @@ exclude:
   - node_modules
   - package.json
   - talkmap 
+  - temp
   - tmp
   - vendor
 keep_files:
@@ -233,7 +234,7 @@ defaults:
     values:
       layout: single
       author_profile: true
-      share: true
+      share: false
       comments: true
   # _publications
   - scope:
@@ -242,7 +243,7 @@ defaults:
     values:
       layout: single
       author_profile: true
-      share: true
+      share: false
       comments: true
   # _portfolio
   # - scope:
