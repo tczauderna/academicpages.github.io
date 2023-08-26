@@ -43,16 +43,45 @@ layout: default
         {% endif %}
         
              
-        {% if page.citation and page.paperurl %}
-          <p>Recommended citation: {{ page.citation }} <a href="{{ page.paperurl }}"><u>{{ page.paperurl }}</u></a></p>
+        {% if page.citation and page.paperurl and page.pdfurl and page.bibtex %}
+          <p> {{ page.citation }} </p>
+	      <p> {% include button.html url=page.paperurl title='URL' %}
+	      {% include button.html url=page.pdfurl title='PDF' %}
+	      {% include button.html url=page.bibtex title='BibTeX' %} </p>
+        {% elsif page.citation and page.paperurl and page.pdfurl %}
+          <p> {{ page.citation }} </p>
+	      <p> {% include button.html url=page.paperurl title='URL' %}
+	      {% include button.html url=page.pdfurl title='PDF' %} </p>
+        {% elsif page.citation and page.paperurl and page.bibtex %}
+          <p> {{ page.citation }} </p>
+	      <p> {% include button.html url=page.paperurl title='URL' %}
+	      {% include button.html url=page.bibtex title='BibTeX' %} </p>
+        {% elsif page.citation and page.pdfurl and page.bibtex %}
+          <p> {{ page.citation }} </p>
+	      <p> {% include button.html url=page.pdfurl title='PDF' %}
+	      {% include button.html url=page.bibtex title='BibTeX' %} </p>
+		{% elsif page.citation and page.paperurl and page.bibtex %}
+          <p> {{ page.citation }} </p>
+          <p> {% include button.html url=page.paperurl title='URL' %}
+          {% include button.html url=page.bibtex title='BibTeX' %} </p>
+        {% elsif page.citation and page.paperurl %}
+          <p> {{ page.citation }} </p>
+          <p> {% include button.html url=page.paperurl title='URL' %} </p>
+        {% elsif page.citation and page.bibtex %}
+          <p> {{ page.citation }} </p>
+          <p> {% include button.html url=page.bibtex title='BibTeX' %} </p>
         {% elsif page.citation %}
-          <p>Recommended citation: {{ page.citation }} </p>
+          <p> {{ page.citation }} </p>
         {% endif %}
     
         </header>
       {% endunless %}
 
       <section class="page__content" itemprop="text">
+        {% if page.citation %}
+		  <!-- </br> -->
+          <p><b>Abstract</b></p>
+        {% endif %}
         {{ content }}
         {% if page.link %}<div><a href="{{ page.link }}" class="btn">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
       </section>
